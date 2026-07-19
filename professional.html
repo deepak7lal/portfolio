@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deepak Lal — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FAFAF8;
+    --surface: #FFFFFF;
+    --ink: #1B2430;
+    --ink-soft: #4A5568;
+    --ink-faint: #8894A3;
+    --accent: #1E5F74;
+    --accent-soft: #E4EEF0;
+    --line: #E4E1DA;
+    --line-strong: #CFCBC1;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', system-ui, sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{ max-width:960px; margin:0 auto; padding:0 32px; }
+
+  .eyebrow{
+    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--accent); font-weight:600;
+  }
+
+  h1,h2,h3{ font-family:'Source Serif 4', serif; font-weight:600; color:var(--ink); }
+
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(250,250,248,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{ max-width:960px; margin:0 auto; padding:20px 32px; display:flex; align-items:center; justify-content:space-between; }
+  .mark{ font-family:'Source Serif 4', serif; font-weight:600; font-size:19px; }
+  .navlinks{ display:none; gap:30px; font-size:13.5px; font-weight:500; }
+  @media(min-width:720px){ .navlinks{display:flex;} }
+  .navlinks a{ color:var(--ink-soft); transition:color 0.2s ease; }
+  .navlinks a:hover{ color:var(--accent); }
+
+  .hero{ padding:88px 0 64px; border-bottom:1px solid var(--line); }
+  .hero-grid{ display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:center; }
+  @media(max-width:600px){ .hero-grid{ grid-template-columns:1fr; text-align:center; } .hero-grid .initials{ margin:0 auto; } }
+  .initials{
+    width:88px; height:88px; border-radius:50%;
+    background:var(--accent); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Source Serif 4', serif; font-size:30px; font-weight:600;
+    flex-shrink:0;
+  }
+  .hero h1{ font-size:clamp(30px,4.5vw,42px); line-height:1.15; margin-bottom:6px; }
+  .hero .role{ font-size:16px; color:var(--ink-soft); font-weight:500; margin-bottom:14px; }
+  .hero p.tagline{ max-width:600px; color:var(--ink-soft); font-size:15.5px; }
+  .hero .ctas{ display:flex; gap:12px; margin-top:22px; flex-wrap:wrap; }
+  @media(max-width:600px){ .hero .ctas{ justify-content:center; } }
+
+  .btn{
+    font-size:13.5px; font-weight:500; padding:10px 20px; border-radius:5px;
+    display:inline-flex; align-items:center; gap:6px; transition:all 0.15s ease; border:1px solid transparent;
+  }
+  .btn-solid{ background:var(--accent); color:#fff; }
+  .btn-solid:hover{ background:#174a5c; }
+  .btn-outline{ background:transparent; color:var(--ink); border-color:var(--line-strong); }
+  .btn-outline:hover{ border-color:var(--accent); color:var(--accent); }
+
+  .stats{
+    margin-top:40px; display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr));
+    gap:0; border-top:1px solid var(--line);
+  }
+  .stat{ padding:18px 4px 0 0; }
+  .stat .num{ font-family:'Source Serif 4', serif; font-size:20px; font-weight:600; color:var(--accent); }
+  .stat .lbl{ font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-faint); margin-top:3px; }
+
+  section{ padding:56px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .section-head{ margin-bottom:32px; }
+  .section-head h2{ font-size:26px; margin-top:6px; }
+
+  .about-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:44px; align-items:start; }
+  @media(max-width:720px){ .about-grid{grid-template-columns:1fr;} }
+  .about-grid p{ color:var(--ink-soft); font-size:15px; margin-bottom:14px; max-width:56ch; }
+  .about-grid p strong{ color:var(--ink); font-weight:600; }
+  .edu-card{ background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:20px 22px; }
+  .edu-card .school{ font-family:'Source Serif 4', serif; font-weight:600; font-size:16px; }
+  .edu-card .meta{ font-size:12.5px; color:var(--ink-faint); margin-top:4px; }
+  .edu-card .divider{ height:1px; background:var(--line); margin:14px 0; }
+
+  .exp-entry{ display:grid; grid-template-columns:140px 1fr; gap:24px; padding:22px 0; border-top:1px solid var(--line); }
+  .exp-entry:first-child{ border-top:none; }
+  @media(max-width:600px){ .exp-entry{ grid-template-columns:1fr; gap:6px; } }
+  .exp-entry .when{ font-size:12.5px; color:var(--ink-faint); font-weight:500; }
+  .exp-entry h3{ font-size:18px; margin-bottom:2px; }
+  .exp-entry .org{ color:var(--accent); font-size:14px; margin-bottom:10px; font-weight:500; }
+  .exp-entry ul{ list-style:none; color:var(--ink-soft); font-size:14.5px; }
+  .exp-entry li{ position:relative; padding-left:14px; margin-bottom:5px; }
+  .exp-entry li::before{ content:"–"; position:absolute; left:0; color:var(--ink-faint); }
+
+  .projects-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:18px; }
+  .pcard{
+    background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:22px 22px 20px;
+    transition:border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .pcard:hover{ border-color:var(--accent); box-shadow:0 4px 16px rgba(27,36,48,0.06); }
+  .pcard .ptag{
+    font-size:11px; letter-spacing:0.04em; text-transform:uppercase; font-weight:600;
+    color:var(--accent); background:var(--accent-soft); padding:3px 9px; border-radius:4px; display:inline-block; margin-bottom:12px;
+  }
+  .pcard h3{ font-size:17.5px; margin-bottom:3px; }
+  .pcard .pyear{ font-size:11.5px; color:var(--ink-faint); margin-bottom:10px; display:block; font-weight:500; }
+  .pcard ul{ list-style:none; font-size:13.5px; color:var(--ink-soft); margin-bottom:14px; }
+  .pcard li{ position:relative; padding-left:13px; margin-bottom:6px; }
+  .pcard li::before{ content:""; position:absolute; left:0; top:7px; width:4px; height:4px; background:var(--accent); border-radius:50%; }
+  .stack{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+  .stack span{ font-size:11px; color:var(--ink-soft); border:1px solid var(--line-strong); padding:3px 8px; border-radius:4px; }
+  .pcard .plink{
+    font-size:13px; font-weight:600; color:var(--accent); display:inline-flex; align-items:center; gap:5px;
+    border-bottom:1px solid transparent; transition:border-color 0.2s ease;
+  }
+  .pcard .plink:hover{ border-color:var(--accent); }
+
+  .progress-note{ font-size:12px; color:var(--ink-faint); margin:6px 0 22px; font-weight:500; }
+  .prog-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:16px; }
+  .prog-card{ border:1px dashed var(--line-strong); border-radius:8px; padding:18px 20px; }
+  .prog-card .status{
+    font-size:10.5px; text-transform:uppercase; letter-spacing:0.05em; font-weight:600;
+    color:#B7791F; margin-bottom:7px;
+  }
+  .prog-card h3{ font-size:16px; margin-bottom:5px; }
+  .prog-card p{ font-size:13.5px; color:var(--ink-soft); }
+
+  .skills-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(210px,1fr)); gap:24px; }
+  .skill-group .eyebrow{ margin-bottom:10px; display:block; }
+  .chips{ display:flex; flex-wrap:wrap; gap:7px; }
+  .chips span{ font-size:13px; padding:5px 11px; background:var(--surface); border:1px solid var(--line); border-radius:5px; color:var(--ink-soft); }
+
+  .ach-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:16px; }
+  .ach-card{ padding:18px 20px; border-left:2px solid var(--accent); background:var(--surface); border-radius:0 6px 6px 0; }
+  .ach-card .eyebrow{ margin-bottom:6px; display:block; }
+  .ach-card p{ font-size:14px; color:var(--ink-soft); }
+  .ach-card p strong{ color:var(--ink); }
+
+  .contact{ text-align:center; padding:72px 0 48px; }
+  .contact h2{ font-size:clamp(24px,3.5vw,32px); max-width:560px; margin:0 auto 16px; }
+  .contact p{ color:var(--ink-soft); max-width:420px; margin:0 auto 26px; font-size:14.5px; }
+  .contact-links{ display:flex; justify-content:center; flex-wrap:wrap; gap:12px; }
+
+  footer{
+    padding:22px 0; display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:10px; font-size:12.5px; color:var(--ink-faint);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="mark">Deepak Lal</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <a href="index.html" style="color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:2px;">Creative Version</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="initials">DL</div>
+      <div>
+        <span class="eyebrow">B.Tech Computer Science · Kerala, India</span>
+        <h1>Deepak Lal</h1>
+        <p class="role">Computer Science student focused on applied ML and backend systems</p>
+        <p class="tagline">I build systems that make sense of messy, real-world inputs — manuscripts, audio, tax rules, medical images — and ship them as working software, from cloud infrastructure to fine-tuned models.</p>
+        <div class="ctas">
+          <a href="#projects" class="btn btn-solid">View Projects</a>
+          <a href="mailto:deepakplal7@gmail.com" class="btn btn-outline">Email Me</a>
+          <a href="https://linkedin.com/in/deepak7lal" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">8.5</div><div class="lbl">CGPA · CS</div></div>
+      <div class="stat"><div class="num">IEEE</div><div class="lbl">MD Chair</div></div>
+      <div class="stat"><div class="num">S. Zone</div><div class="lbl">Badminton Captain</div></div>
+      <div class="stat"><div class="num">MATLAB</div><div class="lbl">Certified</div></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="about-grid">
+      <div>
+        <span class="eyebrow">About</span>
+        <h2 style="margin-top:6px;">A CS student who likes the messy problems</h2>
+        <p style="margin-top:16px;">I'm a third-year Computer Science student at <strong>Chinmaya Vishwavidyapeeth</strong>, working mostly at the intersection of applied machine learning, computer vision, and backend systems. My strongest projects start with something hard for a machine to make sense of and end with a working pipeline that handles it reliably.</p>
+        <p>Outside the classroom, I chair my IEEE Member Development committee and captain my college badminton team at the South Zone level — both taught me a lot about coordinating people under pressure.</p>
+      </div>
+      <div class="edu-card">
+        <div class="school">Chinmaya Vishwavidyapeeth</div>
+        <div class="meta">B.Tech Computer Science · 2023 – 2027 · CGPA 8.5</div>
+        <div class="divider"></div>
+        <div class="school" style="font-size:14.5px;">Rajagiri Higher Secondary School</div>
+        <div class="meta">Class XII, Science · 97% · 2022</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head">
+      <span class="eyebrow">Experience</span>
+      <h2>Where I've worked</h2>
+    </div>
+    <div class="exp-entry">
+      <div class="when">May – Jun 2025</div>
+      <div>
+        <h3>Research Intern</h3>
+        <div class="org">CUSAT — Cochin University of Science and Technology</div>
+        <ul>
+          <li>Worked on image processing and machine learning for manuscript digitization</li>
+          <li>Applied OpenCV preprocessing to clean up scanned manuscript images</li>
+          <li>Improved the text-extraction workflow's accuracy and automation</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">
+      <span class="eyebrow">Selected Work</span>
+      <h2>Things I've built</h2>
+    </div>
+    <div class="projects-grid">
+
+      <div class="pcard">
+        <span class="ptag">Cloud / DevOps</span>
+        <h3>CloudStream</h3>
+        <span class="pyear">Flagship</span>
+        <ul>
+          <li>Cloud-native file storage platform built with FastAPI, PostgreSQL, and MinIO object storage</li>
+          <li>Containerized with Docker and deployed to Kubernetes, including Ingress and a Horizontal Pod Autoscaler</li>
+          <li>Secured with JWT authentication and documented via interactive Swagger API docs</li>
+        </ul>
+        <div class="stack"><span>FastAPI</span><span>Docker</span><span>Kubernetes</span><span>PostgreSQL</span><span>MinIO</span></div>
+        <a class="plink" href="https://github.com/deepak7lal/CloudStream" target="_blank" rel="noopener">View Repository →</a>
+      </div>
+
+      <div class="pcard">
+        <span class="ptag">AI / Fine-tuning</span>
+        <h3>Domain Reply Tuner</h3>
+        <span class="pyear">Flagship</span>
+        <ul>
+          <li>QLoRA fine-tuned Mistral-7B-Instruct specialized for customer-support-style replies</li>
+          <li>Adapter hosted on Hugging Face, paired with a Streamlit demo app for live testing</li>
+          <li>Demonstrates efficient parameter-efficient fine-tuning on a single domain dataset</li>
+        </ul>
+        <div class="stack"><span>Python</span><span>QLoRA</span><span>Mistral-7B</span><span>Streamlit</span></div>
+        <a class="plink" href="https://github.com/deepak7lal/domain-reply-tuner-demo" target="_blank" rel="noopener">View Repository →</a>
+      </div>
+
+      <div class="pcard">
+        <span class="ptag">AI / Full-Stack</span>
+        <h3>CertiCheck-AI</h3>
+        <span class="pyear">2026</span>
+        <ul>
+          <li>AI-powered certificate verification system that analyzes digital certificates to determine authenticity</li>
+          <li>Pairs an automated analysis pipeline with a chatbot interface for querying results</li>
+          <li>Built as a full end-to-end web app, not just a notebook experiment</li>
+        </ul>
+        <div class="stack"><span>TypeScript</span><span>AI</span><span>Chatbot</span></div>
+        <a class="plink" href="https://github.com/deepak7lal/CertiCheck-AI" target="_blank" rel="noopener">View Repository →</a>
+      </div>
+
+      <div class="pcard">
+        <span class="ptag">AI / RAG</span>
+        <h3>YouTube Lecture RAG Assistant</h3>
+        <span class="pyear">2026</span>
+        <ul>
+          <li>Ask questions over lecture transcripts and get grounded, cited answers back</li>
+          <li>Retrieves relevant transcript chunks with ChromaDB before generating a response</li>
+          <li>Powered by Groq's Llama 3.3 70B for fast inference, served through a Streamlit UI</li>
+        </ul>
+        <div class="stack"><span>Python</span><span>ChromaDB</span><span>Groq</span><span>Streamlit</span></div>
+        <a class="plink" href="https://github.com/deepak7lal" target="_blank" rel="noopener">View Repository →</a>
+      </div>
+
+      <div class="pcard">
+        <span class="ptag">Speech / NLP</span>
+        <h3>Whisper Audio Translation</h3>
+        <span class="pyear">2026</span>
+        <ul>
+          <li>Real-time speech translation pipeline built on OpenAI's Whisper model</li>
+          <li>Converts spoken audio into text, then translates it into a target language in one pass</li>
+          <li>Zero manual intervention needed from recording to translated output</li>
+        </ul>
+        <div class="stack"><span>Python</span><span>OpenAI Whisper</span></div>
+        <a class="plink" href="https://github.com/deepak7lal/whisper-audio-translation-system" target="_blank" rel="noopener">View Repository →</a>
+      </div>
+
+      <div class="pcard">
+        <span class="ptag">Computer Vision</span>
+        <h3>Face Detection using OpenCV</h3>
+        <span class="pyear">2025</span>
+        <ul>
+          <li>Real-time face detection via webcam using OpenCV's Haar Cascade classifiers</li>
+          <li>Identifies faces reliably across varied lighting conditions</li>
+          <li>Includes bounding-box annotation as a base for downstream recognition work</li>
+        </ul>
+        <div class="stack"><span>Python</span><span>OpenCV</span></div>
+        <a class="plink" href="https://github.com/deepak7lal/Face-Detection-Using-OpenCV" target="_blank" rel="noopener">View Repository →</a>
+      </div>
+
+      <div class="pcard">
+        <span class="ptag">Software Systems</span>
+        <h3>Interactive Banking Console</h3>
+        <span class="pyear">2025</span>
+        <ul>
+          <li>Java-based terminal system simulating real-time banking and cash dispensation, ATM-style</li>
+          <li>Supports secure account operations through a clean interactive console interface</li>
+          <li>Built to reinforce OOP design and transactional logic fundamentals</li>
+        </ul>
+        <div class="stack"><span>Java</span><span>OOP</span></div>
+        <a class="plink" href="https://github.com/deepak7lal/interactive-banking-console" target="_blank" rel="noopener">View Repository →</a>
+      </div>
+
+      <div class="pcard">
+        <span class="ptag">Web Dev</span>
+        <h3>SkyCast Weather App</h3>
+        <span class="pyear">2025</span>
+        <ul>
+          <li>Clean, user-friendly weather app with real-time updates for any city worldwide</li>
+          <li>Lets users search a location and instantly view essential weather details</li>
+          <li>Deployed as a fast, responsive front-end experience</li>
+        </ul>
+        <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+        <a class="plink" href="https://github.com/deepak7lal/skycast-weather-app" target="_blank" rel="noopener">View Repository →</a>
+      </div>
+
+    </div>
+
+    <p class="progress-note">/ currently building</p>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <div class="status">In Progress</div>
+        <h3>Skin Lesion Classification</h3>
+        <p>Transfer learning for dermatology imaging, built for the IEEE EMBS Student Internship Program 2026 with the IEEE EMBS Pune Chapter. Being written up as a two-column conference paper.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:24px;"><a class="plink" href="https://github.com/deepak7lal?tab=repositories" target="_blank" rel="noopener">See all repositories on GitHub →</a></p>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <span class="eyebrow">Toolbox</span>
+      <h2>What I work with</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <span class="eyebrow">Languages</span>
+        <div class="chips"><span>Java</span><span>Python</span><span>JavaScript</span></div>
+      </div>
+      <div class="skill-group">
+        <span class="eyebrow">Web</span>
+        <div class="chips"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+      </div>
+      <div class="skill-group">
+        <span class="eyebrow">Frameworks & Tools</span>
+        <div class="chips"><span>OpenCV</span><span>MySQL</span><span>Git</span><span>Figma</span><span>MATLAB</span></div>
+      </div>
+      <div class="skill-group">
+        <span class="eyebrow">AI / LLM</span>
+        <div class="chips"><span>OpenAI</span><span>Anthropic</span><span>Gemini</span><span>Prompt Engineering</span><span>RAG</span></div>
+      </div>
+      <div class="skill-group">
+        <span class="eyebrow">Cloud & DevOps</span>
+        <div class="chips"><span>FastAPI</span><span>Docker</span><span>Docker Compose</span><span>Kubernetes</span><span>PostgreSQL</span><span>MinIO</span><span>JWT Auth</span></div>
+      </div>
+      <div class="skill-group">
+        <span class="eyebrow">Core CS</span>
+        <div class="chips"><span>DSA</span><span>OOP</span><span>DBMS</span><span>Operating Systems</span><span>Machine Learning</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="achievements">
+    <div class="section-head">
+      <span class="eyebrow">Beyond the Code</span>
+      <h2>Leadership & recognition</h2>
+    </div>
+    <div class="ach-grid">
+      <div class="ach-card"><span class="eyebrow">Leadership</span><p><strong>IEEE MD Chair</strong> — leading Member Development activities for the chapter.</p></div>
+      <div class="ach-card"><span class="eyebrow">Sport</span><p><strong>Badminton Captain</strong> — South Zone player, leading the college team.</p></div>
+      <div class="ach-card"><span class="eyebrow">Academic</span><p><strong>97%</strong> in Higher Secondary (Class XII), Science stream.</p></div>
+      <div class="ach-card"><span class="eyebrow">Certification</span><p><strong>MATLAB Certified</strong> — applied numerical computing and simulation.</p></div>
+      <div class="ach-card"><span class="eyebrow">Community</span><p><strong>NSS Volunteer</strong>, plus active member of the Coding Club and Sports Club.</p></div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact" style="border-bottom:none;">
+    <span class="eyebrow">Get in touch</span>
+    <h2 style="margin-top:8px;">Have a project, an internship, or just a question?</h2>
+    <p>Happy to talk about backend systems, applied ML, or cloud infrastructure.</p>
+    <div class="contact-links">
+      <a class="btn btn-solid" href="mailto:deepakplal7@gmail.com">Email Me</a>
+      <a class="btn btn-outline" href="tel:+918129337550">+91 81293 37550</a>
+      <a class="btn btn-outline" href="https://linkedin.com/in/deepak7lal" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-outline" href="https://github.com/deepak7lal" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Deepak Lal</span>
+    <span>Kerala, India</span>
+  </footer>
+
+</main>
+
+</body>
+</html>
